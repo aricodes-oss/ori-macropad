@@ -8,9 +8,6 @@ kbd.release_all()
 
 
 while True:
-    to_press = []
-    to_release = []
-
     # See mappings file for why this isn't a dictionary
     for idx, pin in enumerate(PINS):
         code = KEYCODES[idx]
@@ -19,10 +16,7 @@ while True:
         pin.update()
 
         if pin.fell:
-            to_press.append(code)
+            kbd.press(code)
 
         if pin.rose:
-            to_release.append(code)
-
-    kbd.release(*to_release)
-    kbd.press(*to_press)
+            kbd.release(code)
